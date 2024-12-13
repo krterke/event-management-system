@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: Event Management API
+  description: API for managing events, registrations, notifications, etc.
+  version: 1.0.0
+servers:
+  - url: https://final-project-444515.appspot.com/api/
+paths:
+  /events:
+    get:
+      summary: "List all events"
+      operationId: "listEvents"
+      responses:
+        '200':
+          description: "A list of events"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+  /events/{eventId}:
+    get:
+      summary: "Get details of a single event"
+      operationId: "getEvent"
+      parameters:
+        - in: path
+          name: eventId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Event details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        date_time:
+          type: string
+          format: date-time
+        location:
+          type: string

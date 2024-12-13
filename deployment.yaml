@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-django-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-django-app
+  template:
+    metadata:
+      labels:
+        app: my-django-app
+    spec:
+      containers:
+      - name: my-django-app
+        image: gcr.io/final-project-444515/my-django-app:v1
+        ports:
+        - containerPort: 8000
